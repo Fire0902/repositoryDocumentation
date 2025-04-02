@@ -1,0 +1,30 @@
+name: Deploy mdBook to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # ou la branche que tu utilises
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install mdBook
+        run: |
+          curl -sSL https://github.com/rust-lang/mdBook/releases/latest/download/mdbook-linux-x86_64.tar.gz | tar -xz
+          chmod +x mdbook
+          mv mdbook /usr/local/bin/
+
+      - name: Build mdBook
+        run: mdbook build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: book
+          clean: true

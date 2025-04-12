@@ -1,3 +1,3 @@
 # My Project
 
-The future page will describe all my project.
+The future page will describe all my projects.
